@@ -1,0 +1,39 @@
+# Wallner Software Ayarları By Wallner Team
+
+  #dünyalarda otomatik olarak canlı doğmasını sağlar. 
+  #NOT: EĞER oto-mob-spawn-sadece-izin-verilen-dunyalar ile oto-mob-spawn-izin-verilmeyen-dunyalar
+  #ayarının ikiside açık ise çalışmaz ya birisini aç yada hiçbirini açma!
+  #hiçbirini açmazsan tüm dünyalarda mob doğar.
+  oto-mob-spawn: true
+
+  
+  #oto-mob-spawn ayarı açık ise sadece belirtilen dünyalarda otomatik mob doğmasını istiyorsanız bu ayarı açın.
+  #bir dünya belirtmek için OtoMobSpawnAyarlar klasörüne gidin ve izinverilendunyalar.txt dosyasını açın
+  #bu dosyaya otomatik mob doğmasını istediğiniz dünyanın adını yazınız.
+  #birden fazla dünya eklemek istiyorsanız alt satıra geçin ve 2. dünyanın adını yazınız.
+  #örnek ->
+  #world
+  #lobi
+  #NOT: eğer bu ayarı açarsanız oto-mob-spawn-izin-verilmeyen-dunyalar ayarını false yapın.
+  #artık sadece izin verdiğiniz dünyalarda otomatik mob doğacak!
+  oto-mob-spawn-sadece-izin-verilen-dunyalar: false
+
+
+  #oto-mob-spawn ayarı açık ise belirttiğiniz dünya hariç diğer tüm dünyalarda mob doğmasını istiyorsanız bu ayarı açın.
+  #bir dünya belirtmek için OtoMobSpawnAyarlar klasörüne gidin ve izinverilmeyendunyalar.txt dosyasını açın
+  #bu dosyaya otomatik mob doğmamasını istediğiniz dünyanın adını yazınız.
+  #birden fazla dünya eklemek istiyorsanız alt satıra geçin ve 2. dünyanın adını yazınız.
+  #örnek ->
+  #world
+  #lobi
+  #NOT: eğer bu ayarı açarsanız oto-mob-spawn-izin-verilen-dunyalar ayarını false yapın.
+  #artık sadece izin vermediğiniz dünyalar hariç tüm dünyalarda otomatik mob doğacak!
+
+  oto-mob-spawn-izin-verilmeyen-dunyalar: true
+  #wallnerin güçlü koruma sisteminde yetkililer.txt dosyasında adınız yoksa OP yetkiniz bile olsa wallner tarafından sağlanan komutları kullanamazsınız!
+  wallner-koruma-mesaj: "§cWallner §f> bu komutu kullanabilmek için yönetici tarafından izne sahip olmalısınız."
+  #yetkililer.txt dosyasında adınız yoksa bir operatör almaya veya izinsiz bir işlem yapmaya çalışan bir kişi olursa anında discord kanalına bildirim gönderir!
+  wallner-discord-bildirim: true
+  #wallner discord bildirimini açtıysanız bildirimlerin gönderileceği kanalın webhook bağlantısını buraya yapıştırın. örnek olarak bir entegrasyon bağlantısı yapıştırılmıştır.
+  wallner-discord-koruma-webhook: "https://discord.com/api/webhooks/1014764337333813308/nxGVL6wcN8sUr5_K8L9OCcG_2wqRCafUCfHuHjjABxlDGn_jOkYyN_EOk1F2NkCyecA5"
+  #wallner tarafından sağlanan destekler:
