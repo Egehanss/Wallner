@@ -42,6 +42,7 @@ return [];
         
     }
 }
+return [];
 }
 
     public function getXpDropAmount(): int
@@ -55,6 +56,7 @@ return [];
         return 0;
     }
 }
+return 0;
     }
 
 }

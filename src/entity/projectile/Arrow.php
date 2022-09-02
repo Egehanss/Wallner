@@ -105,9 +105,10 @@ class Arrow extends Projectile{
 	public function getResultDamage() : int{
 		$base = parent::getResultDamage();
 		if($this->isCritical()){
-			return ($base + mt_rand(0, (int) ($base / 2) + 1));
+			return 4;
+			#return ($base + mt_rand(0, (int) ($base / 2) + 1));
 		}else{
-			return $base;
+			return 4;
 		}
 	}
 

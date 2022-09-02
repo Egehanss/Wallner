@@ -9,7 +9,7 @@ class Attributes {
 
 	public function AggressiveCreatures(string $name) : bool {
 		return in_array($name, [
-			"Zombie", "CaveSpider", "Spider", "Guardian", "ElderGuardian", "Skeleton", "Slime", "Stray", "Witch", "Wolf", "Blaze", "ZombieVillager", "Drowned", "Vindicator", "Husk", "Evoker"
+			"Zombie", "CaveSpider", "Spider", "Guardian", "ElderGuardian", "Slime", "Stray", "Witch", "Wolf", "Blaze", "ZombieVillager", "Drowned", "Vindicator", "Husk", "Evoker"
 		]);
 	}
 	public function isFlying(string $name) : bool {
@@ -30,8 +30,11 @@ class Attributes {
 	public function isCreeper(string $name) : bool {
 		return in_array($name, ["Creeper"]);
 	}
+	public function isSkeleton(string $name) : bool {
+		return in_array($name, ["Skeleton"]);
+	}
 	public function getEnemyAttack(string $name) : string {
-		$dusmanlar = array("Zombie" => "Villager", "Wolf" => "Skeleton", "Wolf" => "Sheep", "Fox" => "Rabbit", "Fox" => "Chicken");
+		$dusmanlar = array("Zombie" => "Villager", "Wolf" => "Sheep", "Fox" => "Rabbit", "Fox" => "Chicken");
 		foreach ($dusmanlar as $kaynak => $hedef) {
 			if ($kaynak === $name) {
 				return $hedef;

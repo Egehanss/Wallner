@@ -15,11 +15,15 @@ use pocketmine\world\World;
 use pocketmine\block\VanillaBlocks;
 use pocketmine\world\Explosion;
 use pocketmine\world\Position;
+use pocketmine\entity\Location;
 use pocketmine\event\entity\ExplosionPrimeEvent;
 use pocketmine\entity\Explosive;
 use pocketmine\entity\Creeper;
 use pocketmine\world\sound\IgniteSound;
 use pocketmine\world\sound\ExplodeSound;
+use pocketmine\entity\projectile\Arrow as ArrowEntity;
+use pocketmine\entity\projectile\Projectile;
+
 
 class Motion {
 	public function tick(MobsEntity $entity) {
@@ -133,7 +137,7 @@ class Motion {
 
 		return $start;
 	}
-
+ 
 	public function move(MobsEntity $entity) {
 		$motion = $entity->getMotion();
 		$location = $entity->getLocation();
@@ -151,6 +155,15 @@ class Motion {
 		if ($entity->isCreeper() == true) {
 			foreach($entity->getPosition()->getWorld()->getServer()->getOnlinePlayers() as $player){
 		if ($player->getPosition()->distance($entity->getPosition()) < 5){
+			$konum = new Vector3($player->getPosition()->getFloorX(), $player->getPosition()->getFloorY() + 1, $player->getPosition()->getFloorZ());
+		$entity->lookAt($konum);
+		$entity->setTargetEntity($player);
+	}
+}
+		}
+		if ($entity->isSkeleton() == true) {
+			foreach($entity->getPosition()->getWorld()->getServer()->getOnlinePlayers() as $player){
+		if ($player->getPosition()->distance($entity->getPosition()) < 20){
 			$konum = new Vector3($player->getPosition()->getFloorX(), $player->getPosition()->getFloorY() + 1, $player->getPosition()->getFloorZ());
 		$entity->lookAt($konum);
 		$entity->setTargetEntity($player);
@@ -200,6 +213,10 @@ class Motion {
 		if($entity->isCreeper() == true) {
 		$this->attackCreeperEntity($entity, 12);
 	}
+	if($entity->isSkeleton() == true) {
+		$this->attackSkeletonEntity($entity, 4);
+	}
+	
 	}
 		public function isDayTime(World $world) : bool {
 		return $world->getSunAngleDegrees() < 90 or $world->getSunAngleDegrees() > 270;
@@ -295,6 +312,9 @@ class Motion {
 		if ($entity->isCreeper() == true) {
 			return;
 		}
+		if ($entity->isSkeleton() == true) {
+			return;
+		}
 
 		$dist = $entity->getPosition()->distanceSquared($target->getPosition());
 
@@ -310,6 +330,52 @@ class Motion {
 			$ev = new EntityDamageByEntityEvent($entity, $target, EntityDamageEvent::CAUSE_ENTITY_ATTACK, $damage);
 			$target->attack($ev);
 		}
+            }
+
+		$entity->setAttackDelay($entity->getAttackDelay() + 1);
+
+		$pos = $target->getPosition();
+		$entity->setDestination(new Vector3($pos->x, 0, $pos->z));
+                }
+
+
+                public function attackSkeletonEntity(MobsEntity $entity, int $damage) {
+		$target = $entity->getTargetEntity();
+
+		if ($target === null) {
+			return;
+		}
+
+
+		$dist = $entity->getPosition()->distanceSquared($target->getPosition());
+
+		if (!$target->isAlive() or $dist >= 50 or ($target instanceof Player and $target->isCreative() == true)) {
+			$entity->setMovementSpeed(0.05);
+			$entity->setTargetEntity(null);
+			return;
+		}
+
+		if ($entity->getAttackDelay() > 60) {
+            if ($entity->getPosition()->distance($target->getPosition()) <= 11.0) {
+            	if($target instanceof Player){
+
+
+			$entity->setAttackDelay(0);
+            $entity->setMovementSpeed(0.05);
+            $location = $entity->getLocation();
+			$entityarrow = new ArrowEntity(Location::fromObject(
+			$entity->getEyePos(),
+			$entity->getPosition()->getWorld(),
+			($location->yaw > 180 ? 360 : 0) - $location->yaw,
+			-$location->pitch
+		), $entity, 2 >= 1);
+			$konum = new Vector3($target->getPosition()->getFloorX(), $target->getPosition()->getFloorY() + 4, $target->getPosition()->getFloorZ());
+		$entityarrow->setMotion($konum);
+		$entityarrow->spawnToAll();
+
+
+		}
+	}
             }
 
 		$entity->setAttackDelay($entity->getAttackDelay() + 1);

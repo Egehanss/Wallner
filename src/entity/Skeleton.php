@@ -18,10 +18,27 @@ use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\data\bedrock\EntityLegacyIds;
+use pocketmine\math\Vector3;
+use pocketmine\block\VanillaBlocks;
 
 class Skeleton extends MobsEntity {
 	const TYPE_ID = EntityLegacyIds::SKELETON;
 	const HEIGHT = 1.99;
+
+
+        public function initEntity(CompoundTag $nbt) : void{
+      $this->setMaxHealth(10);
+     $this->setMovementSpeed(1.15);
+     $this->attackdelay = 0;
+        $this->defaultlook = new Vector3(0, 0, 0);
+        $this->destination = new Vector3(0, 0, 0);
+     $this->timer = -1;
+        if ($this->isFlying() == true or $this->isSwimming() == true) {
+        $this->setHasGravity(true);
+        }
+     parent::initEntity($nbt);
+      
+    }
 
 
     public function getDrops(): array{
