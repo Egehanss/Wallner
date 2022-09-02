@@ -30,18 +30,31 @@ class Creeper extends MobsEntity {
             if($dmg instanceof Player){
               
                     $lootingL = 1;
-            }
-        }
+            
+        
         if (mt_rand(1, 10) < 3) {
             return [VanillaItems::GUNPOWDER()->setCount(1 * $lootingL)];
         }
 
         return [];
+    }else{
+return [];
+        
     }
+}
+}
 
     public function getXpDropAmount(): int
     {
+        $cause = $this->lastDamageCause;
+        if($cause instanceof EntityDamageByEntityEvent){
+            $dmg = $cause->getDamager();
+            if($dmg instanceof Player){
         return 5 + mt_rand(1, 3);
+    }else{
+        return 0;
+    }
+}
     }
 
 }

@@ -123,6 +123,9 @@ class MobsEntity extends Living {
 	public function isSnowMonster() : bool {
 		return (new Attributes)->isSnowMonster($this->getName());
 	}
+	public function isCreeper() : bool {
+		return (new Attributes)->isCreeper($this->getName());
+	}
 	public function isSwimming() : bool {
 		$swim = (new Attributes)->isSwimming($this->getName());
 		$ticks = $this->getAirSupplyTicks();

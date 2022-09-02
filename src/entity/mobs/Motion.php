@@ -13,6 +13,13 @@ use pocketmine\player\Player;
 use pocketmine\entity\MobsEntity;
 use pocketmine\world\World;
 use pocketmine\block\VanillaBlocks;
+use pocketmine\world\Explosion;
+use pocketmine\world\Position;
+use pocketmine\event\entity\ExplosionPrimeEvent;
+use pocketmine\entity\Explosive;
+use pocketmine\entity\Creeper;
+use pocketmine\world\sound\IgniteSound;
+use pocketmine\world\sound\ExplodeSound;
 
 class Motion {
 	public function tick(MobsEntity $entity) {
@@ -140,6 +147,17 @@ class Motion {
 	 	$world->setBlock($positiong, VanillaBlocks::SNOW_LAYER());
 		}
 
+
+		if ($entity->isCreeper() == true) {
+			foreach($entity->getPosition()->getWorld()->getServer()->getOnlinePlayers() as $player){
+		if ($player->getPosition()->distance($entity->getPosition()) < 5){
+			$konum = new Vector3($player->getPosition()->getFloorX(), $player->getPosition()->getFloorY() + 1, $player->getPosition()->getFloorZ());
+		$entity->lookAt($konum);
+		$entity->setTargetEntity($player);
+	}
+}
+		}
+
 		if (!$entity->onGround and $motion->y < 0 and $flying == false and $swimming == false) {
 			$motion->y *= 0.6;
 		}
@@ -179,6 +197,9 @@ class Motion {
 		$entity->lookAt($look);
 		$entity->setMotion($vec);
 		$this->attackEntity($entity, 4);
+		if($entity->isCreeper() == true) {
+		$this->attackCreeperEntity($entity, 12);
+	}
 	}
 		public function isDayTime(World $world) : bool {
 		return $world->getSunAngleDegrees() < 90 or $world->getSunAngleDegrees() > 270;
@@ -187,7 +208,7 @@ class Motion {
 	public function wait(MobsEntity $entity) {
 		$location = $entity->getLocation();
 		foreach($entity->getPosition()->getWorld()->getServer()->getOnlinePlayers() as $player){
-		if ($player->getPosition()->distance($entity->getPosition()) < 6){
+		if ($player->getPosition()->distance($entity->getPosition()) < 5){
 			$konum = new Vector3($player->getPosition()->getFloorX(), $player->getPosition()->getFloorY() + 1, $player->getPosition()->getFloorZ());
 		$entity->lookAt($konum);
 	}
@@ -271,6 +292,9 @@ class Motion {
 		if ($target === null) {
 			return;
 		}
+		if ($entity->isCreeper() == true) {
+			return;
+		}
 
 		$dist = $entity->getPosition()->distanceSquared($target->getPosition());
 
@@ -286,6 +310,52 @@ class Motion {
 			$ev = new EntityDamageByEntityEvent($entity, $target, EntityDamageEvent::CAUSE_ENTITY_ATTACK, $damage);
 			$target->attack($ev);
 		}
+            }
+
+		$entity->setAttackDelay($entity->getAttackDelay() + 1);
+
+		$pos = $target->getPosition();
+		$entity->setDestination(new Vector3($pos->x, 0, $pos->z));
+                }
+
+
+
+
+        public function attackCreeperEntity(MobsEntity $entity, int $damage) {
+		$target = $entity->getTargetEntity();
+
+		if ($target === null) {
+			return;
+		}
+		
+
+		$dist = $entity->getPosition()->distanceSquared($target->getPosition());
+
+		if (!$target->isAlive() or $dist >= 50 or ($target instanceof Player and $target->isCreative() == true)) {
+			$entity->setMovementSpeed(1.00);
+			$entity->setTargetEntity(null);
+			return;
+		}
+
+		if ($entity->getAttackDelay() > 100) {
+			if ($entity->getPosition()->distance($target->getPosition()) <= 2.0) {
+				$entity->broadcastSound(new IgniteSound());
+			}
+                     if ($entity->getPosition()->distance($target->getPosition()) <= 1.0) {
+			$entity->setAttackDelay(0);
+			$ev = new EntityDamageByEntityEvent($entity, $target, EntityDamageEvent::CAUSE_ENTITY_ATTACK, $damage);
+			$target->attack($ev);
+			$entity->broadcastSound(new ExplodeSound());
+			if ($entity instanceof Creeper) {
+		
+			$ev2 = new EntityDamageByEntityEvent($entity, $target, EntityDamageEvent::CAUSE_ENTITY_ATTACK, 30);
+			$entity->attack($ev2);
+		}
+		}
+		
+            }
+            if($entity === null){
+            	return;
             }
 
 		$entity->setAttackDelay($entity->getAttackDelay() + 1);

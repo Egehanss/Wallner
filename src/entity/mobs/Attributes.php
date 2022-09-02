@@ -9,7 +9,7 @@ class Attributes {
 
 	public function AggressiveCreatures(string $name) : bool {
 		return in_array($name, [
-			"Zombie", "CaveSpider", "Spider", "Guardian", "ElderGuardian", "Skeleton", "Slime", "Creeper", "Stray", "Witch", "Wolf", "Blaze", "ZombieVillager", "Drowned", "Vindicator", "Husk", "Evoker"
+			"Zombie", "CaveSpider", "Spider", "Guardian", "ElderGuardian", "Skeleton", "Slime", "Stray", "Witch", "Wolf", "Blaze", "ZombieVillager", "Drowned", "Vindicator", "Husk", "Evoker"
 		]);
 	}
 	public function isFlying(string $name) : bool {
@@ -26,6 +26,9 @@ class Attributes {
 	}
 	public function isSnowMonster(string $name) : bool {
 		return in_array($name, ["SnowGolem"]);
+	}
+	public function isCreeper(string $name) : bool {
+		return in_array($name, ["Creeper"]);
 	}
 	public function getEnemyAttack(string $name) : string {
 		$dusmanlar = array("Zombie" => "Villager", "Wolf" => "Skeleton", "Wolf" => "Sheep", "Fox" => "Rabbit", "Fox" => "Chicken");
