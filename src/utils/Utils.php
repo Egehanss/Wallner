@@ -301,8 +301,6 @@ final class Utils{
 		}
 
 		$processors = 0;
-		}
-
 		switch(Utils::getOS()){
 			case Utils::OS_LINUX:
 			case Utils::OS_ANDROID:
@@ -328,7 +326,6 @@ final class Utils{
 		}
 		return self::$cpuCores = $processors;
 	}
-
 	/**
 	 * Returns a prettified hexdump
 	 */
