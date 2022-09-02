@@ -12,6 +12,7 @@ use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\entity\MobsEntity;
 use pocketmine\world\World;
+use pocketmine\block\VanillaBlocks;
 
 class Motion {
 	public function tick(MobsEntity $entity) {
@@ -129,8 +130,15 @@ class Motion {
 	public function move(MobsEntity $entity) {
 		$motion = $entity->getMotion();
 		$location = $entity->getLocation();
+		$position = $entity->getPosition();
 		$swimming = $entity->isSwimming();
 		$flying = $entity->isFlying();
+		$kardanadam = $entity->isSnowMonster();
+		$world = $entity->getPosition()->getWorld();
+		if ($entity->isSnowMonster() == true) {
+		$positiong = new Vector3($position->getFloorX(), $position->getFloorY(), $position->getFloorZ());
+	 	$world->setBlock($positiong, VanillaBlocks::SNOW_LAYER());
+		}
 
 		if (!$entity->onGround and $motion->y < 0 and $flying == false and $swimming == false) {
 			$motion->y *= 0.6;
