@@ -16,10 +16,26 @@ use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\CompoundTag;
 use pocketmine\data\bedrock\EntityLegacyIds;
+use pocketmine\math\Vector3;
 
 class Pig extends MobsEntity {
 	const TYPE_ID = EntityLegacyIds::PIG;
 	const HEIGHT = 0.9;
+
+
+    public function initEntity(CompoundTag $nbt) : void{
+      $this->setMaxHealth(14);
+     $this->setMovementSpeed(1.15);
+     $this->attackdelay = 0;
+        $this->defaultlook = new Vector3(0, 0, 0);
+        $this->destination = new Vector3(0, 0, 0);
+     $this->timer = -1;
+        if ($this->isFlying() == true or $this->isSwimming() == true) {
+        $this->setHasGravity(true);
+        }
+     parent::initEntity($nbt);
+      
+    }
 	
     public function getDrops(): array{
         $lootingL = 1;
@@ -28,12 +44,9 @@ class Pig extends MobsEntity {
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
               
-                // $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
-                // if($looting !== null){
-                    // $lootingL = $looting->getLevel();
-                // }else{
+
                     $lootingL = 1;
-            // }
+
             }
         }
         return [

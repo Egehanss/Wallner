@@ -13,6 +13,7 @@ use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
 use function mt_rand;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\math\Vector3;
 use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\item\ItemIds;
 use pocketmine\data\bedrock\EntityLegacyIds;

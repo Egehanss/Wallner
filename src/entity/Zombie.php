@@ -22,18 +22,14 @@ use pocketmine\item\ItemFactory;
 use pocketmine\player\Player;
 use pocketmine\item\ItemIds;
 use pocketmine\entity\MobsEntity;
+use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\math\Vector3;
 use function mt_rand;
 
 class Zombie extends MobsEntity {
     const TYPE_ID = EntityLegacyIds::ZOMBIE;
     const HEIGHT = 1.95;
 
-   # public function initEntity(CompoundTag $nbt) : void
-    #{
-       # $this->setMaxHealth(20);
-        #$this->setMovementSpeed(1.2);
-       # parent::initEntity($nbt);
-   # }
 
     public function getDrops(): array
     {
@@ -43,12 +39,9 @@ class Zombie extends MobsEntity {
             $dmg = $cause->getDamager();
             if ($dmg instanceof Player) {
 
-                // $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
-                // if ($looting !== null) {
-                    // $lootingL = $looting->getLevel();
-                // } else {
+
                     $lootingL = 1;
-                // }
+
             }
         }
         $drops = [

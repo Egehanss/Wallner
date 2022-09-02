@@ -27,6 +27,7 @@ use pocketmine\item\VanillaItems;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\data\bedrock\EntityLegacyIds;
+use pocketmine\math\Vector3;
 
 class Sheep extends MobsEntity {
     const TYPE_ID = EntityLegacyIds::SHEEP;

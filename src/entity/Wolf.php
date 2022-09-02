@@ -17,6 +17,7 @@ use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\item\ItemFactory;
 use pocketmine\item\ItemIds;
 use pocketmine\data\bedrock\EntityLegacyIds;
+use pocketmine\math\Vector3;
 
 class Wolf extends MobsEntity {
 	const TYPE_ID = EntityLegacyIds::WOLF;
@@ -30,12 +31,7 @@ class Wolf extends MobsEntity {
             $dmg = $cause->getDamager();
             if($dmg instanceof Player){
           
-                // $looting = $dmg->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
-                // if($looting !== null){
-                    // $lootingL = $looting->getLevel();
-                // }else{
                     $lootingL = 1;
-            // }
             }
         }
         return [ItemFactory::getInstance()->get(ItemIds::BONE, 0, mt_rand(0, 3 * $lootingL))];

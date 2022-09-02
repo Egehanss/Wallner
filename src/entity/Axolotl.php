@@ -40,28 +40,7 @@ class Axolotl extends MobsEntity {
 	}
 	
 
-    /**public function getDrops(): array{
-        $lootingL = 1;
-        $cause = $this->lastDamageCause;
-        if($cause instanceof EntityDamageByEntityEvent){
-            $damager = $cause->getDamager();
-            if($damager instanceof Player){
-            
-                // $looting = $damager->getInventory()->getItemInHand()->getEnchantment(Enchantment::LOOTING);
-                // if($looting !== null){
-                    // $lootingL = $looting->getLevel();
-                // }else{
-                    $lootingL = 1;
-                // }
-            }
-        }
-        $drops = [VanillaItems::RABBIT_HIDE()->setCount(mt_rand(0, 1 * $lootingL))];
-        if(mt_rand(1, 200) <= (5 + 2 * $lootingL)){
-            $drops[] = VanillaItems::RABBIT_FOOT()->setCount(1 * $lootingL);
-        }
-
-        return $drops;
-    }*/
+    
 	protected function syncNetworkData(EntityMetadataCollection $properties) : void{
 		parent::syncNetworkData($properties);
 		$properties->setInt(EntityMetadataProperties::VARIANT, $this->variant);

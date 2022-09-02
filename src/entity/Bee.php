@@ -10,8 +10,24 @@ use pocketmine\player\Player;
 use pocketmine\entity\EntitySizeInfo;
 use pocketmine\network\mcpe\protocol\types\entity\EntityIds;
 use pocketmine\nbt\tag\CompoundTag;
+use pocketmine\math\Vector3;
+
 class Bee extends MobsEntity
 {
+
+	public function initEntity(CompoundTag $nbt) : void{
+      $this->setMaxHealth(6);
+	 $this->setMovementSpeed(1.15);
+	 $this->attackdelay = 0;
+		$this->defaultlook = new Vector3(0, 0, 0);
+		$this->destination = new Vector3(0, 0, 0);
+	 $this->timer = -1;
+	 	if ($this->isFlying() == true or $this->isSwimming() == true) {
+		$this->setHasGravity(true);
+		}
+	 parent::initEntity($nbt);
+      
+    }
 
 	protected function getInitialSizeInfo() : EntitySizeInfo
 	{

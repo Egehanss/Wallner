@@ -162,10 +162,8 @@ class MonsterSpawner extends Transparent{
             }else{
                 $tile->setSpawnDelay($tile->getMinSpawnDelay() + mt_rand(0, min(0, $tile->getMaxSpawnDelay() - $tile->getMinSpawnDelay())));
                 for($i = 0; $i < $tile->getSpawnCount(); $i++){
-                    $x = ((mt_rand(-5, 5) / 5) * $tile->getSpawnRange()) + 0.5;
-                    $z = ((mt_rand(-5, 5) / 5) * $tile->getSpawnRange()) + 0.5;
                     $pos = $tile->getPosition();
-                    $pos = new Location($pos->x + $x, $pos->y + mt_rand(1, 3), $pos->z + $z, $pos->getWorld(), 0, 0);
+                    $pos = new Location($pos->x + mt_rand(1, 2), $pos->y + 1, $pos->z + mt_rand(1, 2), $pos->getWorld(), 0, 0);
                     
                     
     
