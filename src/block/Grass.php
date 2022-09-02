@@ -140,7 +140,7 @@ class Grass extends Opaque{
             	if($this->isDayTime($this->position->getWorld())){
 
 
-            	$rastgele = rand(1, 50);
+            	$rastgele = rand(1, 90);
             	switch($rastgele){
                     case 1:
 		$pos = new Location($this->position->x, $this->position->y + 1, $this->position->z, $this->position->getWorld(), 0, 0);
@@ -172,7 +172,7 @@ class Grass extends Opaque{
 		break;
 	}
 }else{
-	            $rastgelec = rand(1, 50);
+	            $rastgelec = rand(1, 90);
             	switch($rastgelec){
                     case 1:
 		$pos = new Location($this->position->x, $this->position->y + 1, $this->position->z, $this->position->getWorld(), 0, 0);
