@@ -27,6 +27,13 @@ declare(strict_types=1);
  */
 namespace pocketmine;
 
+use pocketmine\wallner\block\tile\Tiles;
+use pocketmine\block\BlockFactory;
+use pocketmine\network\mcpe\convert\RuntimeBlockMapping;
+use pocketmine\wallner\block\BlockManager;
+use pocketmine\wallner\item\ItemManager;
+use pocketmine\wallner\block\CustomIds;
+use pocketmine\block\BlockLegacyIds as Ids;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\SimpleCommandMap;
@@ -117,6 +124,7 @@ use pocketmine\world\WorldCreationOptions;
 use pocketmine\world\WorldManager;
 use Ramsey\Uuid\UuidInterface;
 use Webmozart\PathUtil\Path;
+use ReflectionMethod;
 use function array_sum;
 use function base64_encode;
 use function cli_set_process_title;
@@ -1113,6 +1121,13 @@ class Server{
 			$this->logger->info(TextFormat::GREEN . "WallNer Software" . TextFormat::WHITE . "'i kullandığınız için teşekkürler! güncellemeleri " . TextFormat::GREEN . "https://github.com/FurkanYks/WallNer/releases " . TextFormat::WHITE . "adresinden takip edebilirsiniz." . TextFormat::RESET);
 
 			$this->logger->info(TextFormat::GREEN. "Sunucu " . TextFormat::WHITE  . strval(round(microtime(true) - $this->startTime, 3)) . TextFormat::GREEN . " saniye içerisinde açıldı.");
+
+			self::initializeRuntimeIds();
+			BlockManager::init();
+			ItemManager::init();
+			Tiles::init();
+
+
 			
 
 			//TODO: move console parts to a separate component
@@ -1138,6 +1153,25 @@ class Server{
 			$this->exceptionHandler($e);
 		}
 	}
+	public static function initializeRuntimeIds(): void{ #olmayan blokları kaydet
+        $instance = RuntimeBlockMapping::getInstance();
+        $method = new ReflectionMethod(RuntimeBlockMapping::class, "registerMapping");
+        $method->setAccessible(true);
+
+        $blockIdMap = json_decode(file_get_contents(BEDROCK_DATA_PATH . 'block_id_map.json'), true);
+        $metaMap = [];
+
+        foreach($instance->getBedrockKnownStates() as $runtimeId => $nbt){
+            $mcpeName = $nbt->getString("name");
+            $meta = isset($metaMap[$mcpeName]) ? ($metaMap[$mcpeName] + 1) : 0;
+            $id = $blockIdMap[$mcpeName] ?? Ids::AIR;
+
+            if($id !== Ids::AIR && $meta <= 15 && !BlockFactory::getInstance()->isRegistered($id, $meta)){
+                $metaMap[$mcpeName] = $meta;
+                $method->invoke($instance, $runtimeId, $id, $meta);
+            }
+        }
+    }
 
 	private function startupPrepareWorlds() : bool{
 		$getGenerator = function(string $generatorName, string $generatorOptions, string $worldName) : ?string{
