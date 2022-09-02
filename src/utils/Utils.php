@@ -108,6 +108,7 @@ final class Utils{
 
 	private static ?string $os = null;
 	private static ?UuidInterface $serverUniqueId = null;
+	private static ?int $cpuCores = null;
 
 	/**
 	 * Returns a readable identifier for the given Closure, including file and line.
@@ -295,12 +296,11 @@ final class Utils{
 	}
 
 	public static function getCoreCount(bool $recalculate = false) : int{
-		static $processors = 0;
+		if(self::$cpuCores !== null && !$recalculate){
+			return self::$cpuCores;
+		}
 
-		if($processors > 0 && !$recalculate){
-			return $processors;
-		}else{
-			$processors = 0;
+		$processors = 0;
 		}
 
 		switch(Utils::getOS()){
@@ -326,7 +326,7 @@ final class Utils{
 				$processors = (int) getenv("NUMBER_OF_PROCESSORS");
 				break;
 		}
-		return $processors;
+		return self::$cpuCores = $processors;
 	}
 
 	/**
@@ -365,12 +365,6 @@ final class Utils{
 				$ord -= 0x100;
 			}
 			$hash = 31 * $hash + $ord;
-			while($hash > 0x7FFFFFFF){
-				$hash -= 0x100000000;
-			}
-			while($hash < -0x80000000){
-				$hash += 0x100000000;
-			}
 			$hash &= 0xFFFFFFFF;
 		}
 		return $hash;
