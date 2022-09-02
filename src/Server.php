@@ -299,6 +299,9 @@ class Server{
 	public function getApiVersion() : string{
 		return VersionInfo::BASE_VERSION;
 	}
+	public function getWallnerVersion() : string{
+		return VersionInfo::WALLNER_VERSION; 
+	}
 
 	public function getFilePath() : string{
 		return \pocketmine\PATH;

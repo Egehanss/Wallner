@@ -31,6 +31,7 @@ use pocketmine\plugin\Plugin;
 use pocketmine\utils\TextFormat;
 use pocketmine\utils\Utils;
 use pocketmine\VersionInfo;
+use pocketmine\Server;
 use function count;
 use function function_exists;
 use function implode;
@@ -58,12 +59,13 @@ class VersionCommand extends VanillaCommand{
 		}
           if (isset($args)){
 		if(count($args) === 0){
-			$sender->sendMessage("§f--- §cWallner Software§c v1.0.0 §f---");
+			$versionw = VersionInfo::WALLNER_VERSION;
+			$sender->sendMessage("§f--- §cWallner Software§c v{$versionw} §f---");
 			$sender->sendMessage("§c* §fNuclear Wallner Powered!");
 			$sender->sendMessage("§c* §fDesteklenen Minecraft Bedrock Edition Sürümleri:§c 1.19.21§f, §c1.19.20");
 			$sender->sendMessage("§c* §fişletim sistemi: §c".Utils::getOS()."");
 			$sender->sendMessage("§c* §fProject Started By §cFurkanYks");
-			$sender->sendMessage("§f--- §cWallner Software§c v1.0.0 §f---");
+			$sender->sendMessage("§f--- §cWallner Software§c v{$versionw} §f---");
 
 			if(
 				function_exists('opcache_get_status') &&

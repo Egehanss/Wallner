@@ -35,6 +35,7 @@ final class VersionInfo{
 	public const BASE_VERSION = "4.8.2";
 	public const IS_DEVELOPMENT_BUILD = false;
 	public const BUILD_CHANNEL = "stable";
+	public const WALLNER_VERSION = "1.0.1";
 
 	private function __construct(){
 		//NOOP
@@ -82,7 +83,7 @@ final class VersionInfo{
 	private static ?VersionString $fullVersion = null;
 
 	public static function VERSION() : VersionString{
-		if(self::$fullVersion === null){
+		if(self::$fullVersion === null){ 
 			self::$fullVersion = new VersionString(self::BASE_VERSION, self::IS_DEVELOPMENT_BUILD, self::BUILD_NUMBER());
 		}
 		return self::$fullVersion;
