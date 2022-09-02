@@ -186,6 +186,12 @@ class Motion {
 
 	public function wait(MobsEntity $entity) {
 		$location = $entity->getLocation();
+		foreach($entity->getPosition()->getWorld()->getServer()->getOnlinePlayers() as $player){
+		if ($player->getPosition()->distance($entity->getPosition()) < 6){
+			$konum = new Vector3($player->getPosition()->getFloorX(), $player->getPosition()->getFloorY() + 1, $player->getPosition()->getFloorZ());
+		$entity->lookAt($konum);
+	}
+}
 
 		if ($entity->lastUpdate % 100 == 0) {
 			if ($entity->getHealth() < $entity->getMaxHealth()) {
