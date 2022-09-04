@@ -30,6 +30,20 @@
   #artık sadece izin vermediğiniz dünyalar hariç tüm dünyalarda otomatik mob doğacak!
 
   oto-mob-spawn-izin-verilmeyen-dunyalar: true
+
+
+  #kaktüs büyüme şansını ne kadar arttırırsanız o kadar yavaş büyür.
+  #bu sayıyı ne kadar azaltırsanız tüm kaktüsler o kadar hızlı büyür.
+  #default: 10 da bir ihtimal.
+  #bu sayı minimum 1 olmalıdır.
+  kaktus-buyume-sansi: 10
+
+  #şeker kamışı şansını ne kadar arttırırsanız o kadar yavaş büyür.
+  #bu sayıyı ne kadar azaltırsanız tüm şeker kamışları o kadar hızlı büyür.
+  #default: 10 da bir ihtimal.
+  #bu sayı minimum 1 olmalıdır.
+  seker-kamisi-buyume-sansi: 10
+
   #wallnerin güçlü koruma sisteminde yetkililer.txt dosyasında adınız yoksa OP yetkiniz bile olsa wallner tarafından sağlanan komutları kullanamazsınız!
   wallner-koruma-mesaj: "§cWallner §f> bu komutu kullanabilmek için yönetici tarafından izne sahip olmalısınız."
   #yetkililer.txt dosyasında adınız yoksa bir operatör almaya veya izinsiz bir işlem yapmaya çalışan bir kişi olursa anında discord kanalına bildirim gönderir!

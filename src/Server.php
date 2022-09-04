@@ -779,6 +779,9 @@ class Server{
 	public function getWallnerStringConfig(string $name) : string{
 		return $this->wallnerconfig->get($name);
 	}
+	public function getWallnerIntConfig(string $name) : int{
+		return $this->wallnerconfig->get($name);
+	}
 
 	public function getOps() : Config{
 		return $this->operators;
@@ -1122,11 +1125,13 @@ class Server{
 			$this->logger->info(TextFormat::GREEN . "WallNer Software" . TextFormat::WHITE . "'i kullandığınız için teşekkürler! güncellemeleri " . TextFormat::GREEN . "https://github.com/FurkanYks/WallNer/releases " . TextFormat::WHITE . "adresinden takip edebilirsiniz." . TextFormat::RESET);
 
 			$this->logger->info(TextFormat::GREEN. "Sunucu " . TextFormat::WHITE  . strval(round(microtime(true) - $this->startTime, 3)) . TextFormat::GREEN . " saniye içerisinde açıldı.");
-
+			
 			self::initializeRuntimeIds();
 			BlockManager::init();
 			ItemManager::init();
 			Tiles::init();
+
+
 
 
 			

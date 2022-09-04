@@ -1,23 +1,5 @@
 <?php
 
-/*
- *
- *  ____            _        _   __  __ _                  __  __ ____
- * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \
- * | |_) / _ \ / __| |/ / _ \ __| |\/| | | '_ \ / _ \_____| |\/| | |_) |
- * |  __/ (_) | (__|   <  __/ |_| |  | | | | | |  __/_____| |  | |  __/
- * |_|   \___/ \___|_|\_\___|\__|_|  |_|_|_| |_|\___|     |_|  |_|_|
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * @author PocketMine Team
- * @link http://www.pocketmine.net/
- *
- *
-*/
 
 declare(strict_types=1);
 
@@ -34,48 +16,26 @@ use pocketmine\math\Facing;
 use pocketmine\math\Vector3;
 use pocketmine\player\Player;
 use pocketmine\world\BlockTransaction;
+use pocketmine\block\BlockLegacyIds as Ids;
+use pocketmine\block\VanillaBlocks;
 
 class Cactus extends Transparent{
 
-	protected int $age = 0;
-
-	protected function writeStateToMeta() : int{
-		return $this->age;
-	}
-
-	public function readStateFromData(int $id, int $stateMeta) : void{
-		$this->age = BlockDataSerializer::readBoundedInt("age", $stateMeta, 0, 15);
-	}
-
 	public function getStateBitmask() : int{
 		return 0b1111;
-	}
-
-	public function getAge() : int{ return $this->age; }
-
-	/** @return $this */
-	public function setAge(int $age) : self{
-		if($age < 0 || $age > 15){
-			throw new \InvalidArgumentException("Age must be in range 0-15");
-		}
-		$this->age = $age;
-		return $this;
 	}
 
 	public function hasEntityCollision() : bool{
 		return true;
 	}
 
-	/**
-	 * @return AxisAlignedBB[]
-	 */
 	protected function recalculateCollisionBoxes() : array{
 		$shrinkSize = 1 / 16;
 		return [AxisAlignedBB::one()->contract($shrinkSize, 0, $shrinkSize)->trim(Facing::UP, $shrinkSize)];
 	}
 
 	public function onEntityInside(Entity $entity) : bool{
-		$ev = new EntityDamageByBlockEvent($this, $entity, EntityDamageEvent::CAUSE_CONTACT, 1);
+		$ev = new EntityDamageByBlockEvent($this, $entity, EntityDamageEvent::CAUSE_CONTACT, 1); #kaktüs hasarı
 		$entity->attack($ev);
 		return true;
 	}
@@ -95,39 +55,72 @@ class Cactus extends Transparent{
 		}
 	}
 
+
 	public function ticksRandomly() : bool{
 		return true;
 	}
 
 	public function onRandomTick() : void{
-		if(!$this->getSide(Facing::DOWN)->isSameType($this)){
-			if($this->age === 15){
-				for($y = 1; $y < 3; ++$y){
-					if(!$this->position->getWorld()->isInWorld($this->position->x, $this->position->y + $y, $this->position->z)){
-						break;
-					}
-					$b = $this->position->getWorld()->getBlockAt($this->position->x, $this->position->y + $y, $this->position->z);
-					if($b->getId() === BlockLegacyIds::AIR){
-						$ev = new BlockGrowEvent($b, VanillaBlocks::CACTUS());
-						$ev->call();
-						if($ev->isCancelled()){
-							break;
-						}
-						$this->position->getWorld()->setBlock($b->position, $ev->getNewState());
-					}else{
-						break;
-					}
-				}
-				$this->age = 0;
-				$this->position->getWorld()->setBlock($this->position, $this);
-			}else{
-				++$this->age;
-				$this->position->getWorld()->setBlock($this->position, $this);
-			}
+		$kontrol = $this->kontrollimit();
+		if($kontrol === "uygun"){
+        $this->orankontrol();
 		}
+	}
+	public function orankontrol(){
+	$sans = $this->position->getWorld()->getServer()->getWallnerIntConfig("kaktus-buyume-sansi");
+    $oran = rand(1, $sans);
+    switch($oran){
+    	case 1:
+     $this->kaktusubuyut();
+    	break;
+    }
+	}
+    public function kaktusubuyut(){
+    $world = $this->position->getWorld();
+    $positionblock = new Vector3($this->position->x, $this->position->y + 1, $this->position->z);
+    $world->setBlock($positionblock, VanillaBlocks::CACTUS());
+    }
+	public function kontrollimit(){
+		$world = $this->position->getWorld();
+		$worldname = $this->position->getWorld()->getFolderName();
+		$positionblock = new Vector3($this->position->x, $this->position->y, $this->position->z);
+
+ 	    $block1 = $world->getBlockAt($this->position->x, $this->position->y, $this->position->z); #bloğun konumu
+ 	    $block2 = $world->getBlockAt($this->position->x, $this->position->y + 1, $this->position->z); #bloğun bir üstü
+ 	    $block3 = $world->getBlockAt($this->position->x, $this->position->y + 2, $this->position->z); #bloğun iki üstü
+ 	    $block4 = $world->getBlockAt($this->position->x, $this->position->y - 1, $this->position->z); #bloğun bir altı
+ 	    $block5 = $world->getBlockAt($this->position->x, $this->position->y - 2, $this->position->z); #bloğun iki altı
+
+ 	    if($block1->getId() == Ids::CACTUS){
+ 	    	if($block2->getId() == Ids::CACTUS){
+ 	    		if($block3->getId() == Ids::CACTUS){
+ 	    			if($block4->getId() == Ids::SAND){
+ 	    				return "uygundegil";
+ 	    		}
+ 	    	}
+
+ 	    }
+ 	}
+ 	if($block1->getId() == Ids::CACTUS){
+ 	    	if($block2->getId() == Ids::AIR){
+ 	    			if($block4->getId() == Ids::SAND){
+ 	    				return "uygun";
+ 	    		}
+
+ 	    }
+ 	}
+ 	    			if($block5->getId() == Ids::SAND){
+ 	    				if($block4->getId() == Ids::CACTUS){
+ 	    					if($block2->getId() == Ids::AIR){
+ 	    				return "uygun";
+ 	    		}
+ 	    	}
+ 	    	}
+
 	}
 
 	public function place(BlockTransaction $tx, Item $item, Block $blockReplace, Block $blockClicked, int $face, Vector3 $clickVector, ?Player $player = null) : bool{
+
 		$down = $this->getSide(Facing::DOWN);
 		if($down->getId() === BlockLegacyIds::SAND or $down->isSameType($this)){
 			foreach(Facing::HORIZONTAL as $side){

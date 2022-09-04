@@ -25,6 +25,7 @@ namespace pocketmine\block;
 
 use pocketmine\block\BlockLegacyIds as Ids;
 use pocketmine\utils\CloningRegistryTrait;
+use pocketmine\wallner\block\CustomIds;
 
 /**
  * This doc-block is generated automatically, do not modify it manually.
@@ -1143,5 +1144,6 @@ final class VanillaBlocks{
         self::register("beetroot7", $factory->get(Ids::BEETROOT_BLOCK, 7));
         self::register("pumpkinstem7", $factory->get(Ids::PUMPKIN_STEM, 7));
         self::register("melonstem7", $factory->get(Ids::MELON_STEM, 7));
+        self::register("warped_planks", $factory->get(CustomIds::WARPED_PLANKS_BLOCK, 0));
 	}
 }
