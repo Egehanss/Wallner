@@ -32,6 +32,12 @@ class Sugarcane extends Flowable{
         $this->orankontrol();
 		}
 	}
+	public function onNearbyBlockChange() : void{
+		$down = $this->getSide(Facing::DOWN);
+		if(!$this->isValidSupport($down)){
+			$this->position->getWorld()->useBreakOn($this->position);
+		}
+	}
 	public function orankontrol(){
 	$sans = $this->position->getWorld()->getServer()->getWallnerIntConfig("seker-kamisi-buyume-sansi");
     $oran = rand(1, $sans);
@@ -52,8 +58,10 @@ class Sugarcane extends Flowable{
     public function sekerkamisinibuyut(){
     $world = $this->position->getWorld();
     $positionblock = new Vector3($this->position->x, $this->position->y + 1, $this->position->z);
+    if($world->isInWorld((int) $this->position->x, (int) $this->position->y + 1, (int) $this->position->z)){
     $world->setBlock($positionblock, VanillaBlocks::SUGARCANE());
     }
+}
 	public function kontrollimit(){
 		$world = $this->position->getWorld();
 		$worldname = $this->position->getWorld()->getFolderName();
@@ -65,16 +73,6 @@ class Sugarcane extends Flowable{
  	    $block4 = $world->getBlockAt($this->position->x, $this->position->y - 1, $this->position->z); #bloğun bir altı
  	    $block5 = $world->getBlockAt($this->position->x, $this->position->y - 2, $this->position->z); #bloğun iki altı
 
- 	    if($block1->getId() == Ids::REEDS_BLOCK){
- 	    	if($block2->getId() == Ids::REEDS_BLOCK){
- 	    		if($block3->getId() == Ids::REEDS_BLOCK){
- 	    			if($block4->getId() == Ids::SAND or $block4->getId() == Ids::GRASS or $block4->getId() == Ids::DIRT or $block4->getId() == Ids::PODZOL){
- 	    				return "uygundegil";
- 	    		}
- 	    	}
-
- 	    }
- 	} 
  	if($block1->getId() == Ids::REEDS_BLOCK){
  	    	if($block2->getId() == Ids::AIR){
  	    			if($block4->getId() == Ids::SAND or $block4->getId() == Ids::GRASS or $block4->getId() == Ids::DIRT or $block4->getId() == Ids::PODZOL){
