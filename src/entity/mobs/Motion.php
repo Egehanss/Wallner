@@ -19,7 +19,7 @@ use pocketmine\entity\Location;
 use pocketmine\event\entity\ExplosionPrimeEvent;
 use pocketmine\entity\Explosive;
 use pocketmine\entity\Creeper;
-use pocketmine\world\sound\IgniteSound;
+use pocketmine\world\sound\IgniteSound; 
 use pocketmine\world\sound\ExplodeSound;
 use pocketmine\entity\projectile\Arrow as ArrowEntity;
 use pocketmine\entity\projectile\Projectile;
@@ -131,8 +131,12 @@ class Motion {
 			$safe = $world->getSafeSpawn($vec);
 
 			if ($safe->y > 0) {
+				
+			
 				return $safe;
-			}
+			
+			
+		}
 		}
 
 		return $start;
