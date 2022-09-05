@@ -1126,10 +1126,6 @@ class Server{
 
 			$this->logger->info(TextFormat::GREEN. "Sunucu " . TextFormat::WHITE  . strval(round(microtime(true) - $this->startTime, 3)) . TextFormat::GREEN . " saniye içerisinde açıldı.");
 			
-			self::initializeRuntimeIds();
-			BlockManager::init();
-			ItemManager::init();
-			Tiles::init();
 
 
 
