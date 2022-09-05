@@ -1,5 +1,9 @@
 # Wallner Software Ayarları By Wallner Team
 
+  #Otomatik Wallner Config güncellemesi için bu sürümü değiştirmeyin.
+  #Wallneri bir sonraki sürüme güncellediğinizde otomatik olarak dosyayı yeniler.
+  wallner-version: "1.0.6"
+
   #dünyalarda otomatik olarak canlı doğmasını sağlar. 
   #NOT: EĞER oto-mob-spawn-sadece-izin-verilen-dunyalar ile oto-mob-spawn-izin-verilmeyen-dunyalar
   #ayarının ikiside açık ise çalışmaz ya birisini aç yada hiçbirini açma!
