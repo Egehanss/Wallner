@@ -38,8 +38,8 @@ class MonsterSpawner extends Spawnable {
     private int $spawnCount = 5;
     private int $spawnRange = 1;
     private int $spawnDelay = 10;
-    private int $minSpawnDelay = 10;
-    private int $maxSpawnDelay = 15;
+    private int $minSpawnDelay = 30;
+    private int $maxSpawnDelay = 35;
     private int $tick = 20;
 
 
@@ -103,7 +103,7 @@ class MonsterSpawner extends Spawnable {
 
     public function canEntityGenerate(): bool{
         foreach($this->position->getWorld()->getServer()->getOnlinePlayers() as $player){
-            if ($player->getPosition()->distance($this->getPosition()) < 16){
+            if ($player->getPosition()->distance($this->getPosition()) < 6){
                 return true;
             }
         }

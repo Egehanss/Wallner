@@ -131,10 +131,10 @@ class Motion {
 			$safe = $world->getSafeSpawn($vec);
 
 			if ($safe->y > 0) {
-				
-			
-				return $safe;
-			
+				if($safe->y <= $start->y){ 
+
+					return $safe;
+				}
 			
 		}
 		}

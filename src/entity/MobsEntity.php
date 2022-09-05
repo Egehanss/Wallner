@@ -94,7 +94,7 @@ class MobsEntity extends Living {
 			$this->timer = 20;
 			$this->setMovementSpeed(1.50);
 		} else {
-			$this->timer = 20;
+			$this->timer = 10;
 			$this->setMovementSpeed(2.20);
 		}
 

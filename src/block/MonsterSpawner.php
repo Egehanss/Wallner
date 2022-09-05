@@ -78,6 +78,7 @@ use pocketmine\entity\Axolotl;
 use pocketmine\entity\Sheep;
 use pocketmine\entity\Squid;
 use pocketmine\entity\Villager;
+use pocketmine\world\World;
 
 use function mt_rand;
 
@@ -169,136 +170,180 @@ class MonsterSpawner extends Transparent{
     
                     
                     if($tile->getEntityId() == 10){
-                        new Chicken($pos);
+                        $entity = $this->createChicken($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 11){
-                        new Cow($pos);
+                        $entity = $this->createCow($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 12){
-                        new Pig($pos);
+                        $entity = $this->createPig($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 13){
-                        new Sheep($pos);
+                        $entity = $this->createSheep($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 14){
-                        new Wolf($pos);
+                        $entity = $this->createWolf($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 15){
-                        new Villager($pos);
+                        $entity = $this->createVillager($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 16){
-                        new Mooshroom($pos);
+                        $entity = $this->createMooshroom($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 17){
-                        new Squid($pos);
+                        $entity = $this->createSquid($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 18){
-                        new Rabbit($pos);
+                        $entity = $this->createRabbit($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 19){
-                        new Bat($pos);
+                        $entity = $this->createBat($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 20){
-                        new IronGolem($pos);
+                        $entity = $this->createIronGolem($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 22){
-                        new Ocelot($pos);
+                        $entity = $this->createOcelot($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 23){
-                        new Horse($pos);
+                        $entity = $this->createHorse($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 24){
-                        new Donkey($pos);
+                        $entity = $this->createDonkey($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 26){
-                        new SkeletonHorse($pos);
+                        $entity = $this->createSkeletonHorse($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 28){
-                        new PolarBear($pos);
+                        $entity = $this->createPolarBear($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 29){
-                        new Llama($pos);
+                        $entity = $this->createLlama($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 30){
-                        new Parrot($pos);
+                        $entity = $this->createParrot($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 31){
-                        new Dolphin($pos);
+                        $entity = $this->createDolphin($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 32){
-                        new Zombie($pos);
+                        $entity = $this->createZombie($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 33){
-                        new Creeper($pos);
+                        $entity = $this->createCreeper($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 34){
-                        new Skeleton($pos);
+                        $entity = $this->createSkeleton($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 35){
-                        new Spider($pos);
+                        $entity = $this->createSpider($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 37){
-                        new Slime($pos);
+                        $entity = $this->createSlime($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 38){
-                        new Enderman($pos);
+                        $entity = $this->createEnderman($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 39){
-                        new Silverfish($pos);
+                        $entity = $this->createSilverfish($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 40){
-                        new CaveSpider($pos);
+                        $entity = $this->createCaveSpider($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 41){
-                        new Ghast($pos);
+                        $entity = $this->createGhast($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 42){
-                        new MagmaCube($pos);
+                        $entity = $this->createMagmaCube($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 43){
-                        new Blaze($pos);
+                        $entity = $this->createBlaze($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 44){
-                        new ZombieVillager($pos);
+                        $entity = $this->createZombieVillager($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 45){
-                        new Witch($pos);
+                        $entity = $this->createWitch($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 46){
-                        new Stray($pos);
+                        $entity = $this->createStray($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 47){
-                        new Husk($pos);
+                        $entity = $this->createHusk($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 49){
-                        new Guardian($pos);
+                        $entity = $this->createGuardian($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 50){
-                        new ElderGuardian($pos);
+                        $entity = $this->createElderGuardian($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 57){
-                        new Vindicator($pos);
+                        $entity = $this->createVindicator($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 58){
-                        new Phantom($pos);
+                        $entity = $this->createPhantom($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 75){
-                        new Cat($pos);
+                        $entity = $this->createCat($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 104){
-                        new Evoker($pos);
+                        $entity = $this->createEvoker($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 109){
-                        new Salmon($pos);
+                        $entity = $this->createSalmon($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 110){
-                        new Drowned($pos);
+                        $entity = $this->createDrowned($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 111){
-                        new TropicalFish($pos);
+                        $entity = $this->createTropicalFish($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
                     if($tile->getEntityId() == 113){
-                        new Cod($pos);
+                        $entity = $this->createCod($this->position->getWorld(), $this->position->add(mt_rand(-1, 1), 1, mt_rand(-1, 1)), lcg_value() * 360, 0);
+                        $entity->spawnToAll();
                     }
 
                     $i++;
@@ -307,4 +352,139 @@ class MonsterSpawner extends Transparent{
         }
         $this->position->getWorld()->scheduleDelayedBlockUpdate($this->position, 1);
     }
+
+
+
+            public function createCod(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Cod(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createTropicalFish(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new TropicalFish(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createDrowned(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Drowned(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSalmon(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Salmon(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createEvoker(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Evoker(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createCat(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Cat(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createPhantom(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Phantom(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createVindicator(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Vindicator(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createElderGuardian(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new ElderGuardian(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createGuardian(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Guardian(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createHusk(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Husk(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createStray(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Stray(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createWitch(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Witch(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createZombieVillager(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new ZombieVillager(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createBlaze(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Blaze(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createMagmaCube(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new MagmaCube(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createGhast(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Ghast(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createCaveSpider(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new CaveSpider(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSilverfish(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Silverfish(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createEnderman(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Enderman(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSlime(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Slime(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSpider(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Spider(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSkeleton(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Skeleton(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createCreeper(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Creeper(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createZombie(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Zombie(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createDolphin(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Dolphin(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createParrot(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Parrot(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createLlama(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Llama(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createPolarBear(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new PolarBear(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSkeletonHorse(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new SkeletonHorse(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createDonkey(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Donkey(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createHorse(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Horse(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createOcelot(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Ocelot(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createIronGolem(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new IronGolem(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createBat(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Bat(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createRabbit(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Rabbit(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSquid(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Squid(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createMooshroom(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Mooshroom(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createVillager(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Villager(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createWolf(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Wolf(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createSheep(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Sheep(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createPig(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Pig(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createCow(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Cow(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
+            public function createChicken(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new Chicken(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
 }
