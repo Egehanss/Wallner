@@ -78,8 +78,10 @@ class Cactus extends Transparent{
     public function kaktusubuyut(){
     $world = $this->position->getWorld();
     $positionblock = new Vector3($this->position->x, $this->position->y + 1, $this->position->z);
+    if($world->isInWorld((int) $this->position->x, (int) $this->position->y + 1, (int) $this->position->z)){
     $world->setBlock($positionblock, VanillaBlocks::CACTUS());
     }
+}
 	public function kontrollimit(){
 		$world = $this->position->getWorld();
 		$worldname = $this->position->getWorld()->getFolderName();
@@ -91,16 +93,7 @@ class Cactus extends Transparent{
  	    $block4 = $world->getBlockAt($this->position->x, $this->position->y - 1, $this->position->z); #bloğun bir altı
  	    $block5 = $world->getBlockAt($this->position->x, $this->position->y - 2, $this->position->z); #bloğun iki altı
 
- 	    if($block1->getId() == Ids::CACTUS){
- 	    	if($block2->getId() == Ids::CACTUS){
- 	    		if($block3->getId() == Ids::CACTUS){
- 	    			if($block4->getId() == Ids::SAND){
- 	    				return "uygundegil";
- 	    		}
- 	    	}
-
- 	    }
- 	}
+ 	    
  	if($block1->getId() == Ids::CACTUS){
  	    	if($block2->getId() == Ids::AIR){
  	    			if($block4->getId() == Ids::SAND){
