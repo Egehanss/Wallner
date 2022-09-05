@@ -148,8 +148,10 @@ class Motion {
 		$world = $entity->getPosition()->getWorld();
 		if ($entity->isSnowMonster() == true) {
 		$positiong = new Vector3($position->getFloorX(), $position->getFloorY(), $position->getFloorZ());
+		if($world->isInWorld((int) $position->getFloorX(), (int) $position->getFloorY() - 2, (int) $position->getFloorZ())){
 	 	$world->setBlock($positiong, VanillaBlocks::SNOW_LAYER());
 		}
+	}
 
 
 		if ($entity->isCreeper() == true) {
