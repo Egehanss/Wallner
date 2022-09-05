@@ -290,4 +290,13 @@ if(!$blockyeni->getId() == Ids::AIR){
 
 		return false;
 	}
+	private function isValidSupport(Block $block) : bool{
+		$id = $block->getId();
+		return $block->isSameType($this)
+			|| $id === BlockLegacyIds::GRASS
+			|| $id === BlockLegacyIds::DIRT
+			|| $id === BlockLegacyIds::PODZOL
+			|| $id === BlockLegacyIds::MYCELIUM
+			|| $id === BlockLegacyIds::SAND;
+	}
 }
