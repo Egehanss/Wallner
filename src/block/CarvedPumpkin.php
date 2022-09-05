@@ -35,6 +35,8 @@ use pocketmine\block\VanillaBlocks;
 use pocketmine\entity\SnowGolem;
 use pocketmine\entity\Location;
 use pocketmine\player\Player;
+use pocketmine\world\World;
+use pocketmine\entity\Entity;
 
 class CarvedPumpkin extends Opaque{
 	use FacesOppositePlacingPlayerTrait;
@@ -85,11 +87,15 @@ class CarvedPumpkin extends Opaque{
     }
     public function kardanadamyap(){
 
-        $pos = new Location($this->position->x, $this->position->y - 1, $this->position->z, $this->position->getWorld(), 0, 0);
-        new SnowGolem($pos);
+        $entity = $this->createSnowGolem($this->position->getWorld(), $this->position->add(0.5, 0, 0.5), lcg_value() * 360, 0);
+        $entity->spawnToAll();
+
         $positionblock = new Vector3($this->position->x, $this->position->y, $this->position->z);
         $world = $this->position->getWorld();
         $world->setBlock($positionblock, VanillaBlocks::AIR());
 
     }
+    public function createSnowGolem(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+                return new SnowGolem(Location::fromObject($pos, $world, $yaw, $pitch));
+            }
 }
