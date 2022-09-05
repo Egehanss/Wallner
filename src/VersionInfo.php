@@ -35,10 +35,10 @@ final class VersionInfo{
 	public const BASE_VERSION = "4.8.2";
 	public const IS_DEVELOPMENT_BUILD = false;
 	public const BUILD_CHANNEL = "stable";
-	public const WALLNER_VERSION = "1.0.5";
+	public const WALLNER_VERSION = "1.0.6";
 
 	private function __construct(){
-		//NOOP
+		
 	}
 
 	private static ?string $gitHash = null;
