@@ -1,24 +1,5 @@
 <?php
 
-/*
- *
- *  ____            _        _   __  __ _                  __  __ ____
- * |  _ \ ___   ___| | _____| |_|  \/  (_)_ __   ___      |  \/  |  _ \
- * | |_) / _ \ / __| |/ / _ \ __| |\/| | | '_ \ / _ \_____| |\/| | |_) |
- * |  __/ (_) | (__|   <  __/ |_| |  | | | | | |  __/_____| |  | |  __/
- * |_|   \___/ \___|_|\_\___|\__|_|  |_|_|_| |_|\___|     |_|  |_|_|
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * @author PocketMine Team
- * @link http://www.pocketmine.net/
- *
- *
- */
-
 declare(strict_types=1);
 
 namespace pocketmine\block;
@@ -169,10 +150,6 @@ class Bamboo extends Transparent{
 			$this->position->getWorld()->useBreakOn($this->position);
 		}
 	}
-	public function onScheduledUpdate(): void{
-	$this->position->getWorld()->scheduleDelayedBlockUpdate($this->position, 1);
-	$this->onRandomTick();
-	}
 
 	private function grow(int $maxHeight, int $growAmount, ?Player $player) : bool{
 		$world = $this->position->getWorld();
@@ -227,24 +204,23 @@ class Bamboo extends Transparent{
 			return false;
 		}
 
-		return $tx->apply(); 
+		return $tx->apply();
 	}
 
 	public function ticksRandomly() : bool{
 		return true;
 	}
 
-		public function onRandomTick() : void{
-
-			$world = $this->position->getWorld();
-			$worldname = $this->position->getWorld()->getFolderName();
-
-			$server = $world->getServer();
-			#$plugin = $server->getPluginManager()->getPlugin("WallnerBamboo");
-			$xx = $this->position->x;
-			$yy = $this->position->y;
-			$zz = $this->position->z;
-			$worldfoldername = $this->position->getWorld()->getFolderName();
-			
+	public function onRandomTick() : void{
+		$world = $this->position->getWorld();
+		if($this->ready){
+			$this->ready = false;
+			if($world->getFullLight($this->position) < 9 || !$this->grow(self::getMaxHeight($this->position->getFloorX(), $this->position->getFloorZ()), 1, null)){
+				$world->setBlock($this->position, $this);
+			}
+		}elseif($world->getBlock($this->position->up())->canBeReplaced()){
+			$this->ready = true;
+			$world->setBlock($this->position, $this);
 		}
+	}
 }
