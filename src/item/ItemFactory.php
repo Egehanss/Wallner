@@ -65,6 +65,7 @@ use pocketmine\entity\Rabbit;
 #use pocketmine\entity\PufferFish;
 use pocketmine\entity\PolarBear;
 use pocketmine\entity\Pig;
+use pocketmine\entity\Warden;
 use pocketmine\entity\Phantom;
 use pocketmine\entity\Parrot;
 use pocketmine\entity\Ocelot;
@@ -406,6 +407,11 @@ class ItemFactory{
 				return new Zombie(Location::fromObject($pos, $world, $yaw, $pitch));
 			}
 		});
+		$this->register(new class(new IID(Ids::SPAWN_EGG, EntityLegacyIds::WARDEN), "Warden Spawn Egg") extends SpawnEgg{
+			protected function createEntity(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
+				return new Warden(Location::fromObject($pos, $world, $yaw, $pitch));
+			}
+		});
 		$this->register(new class(new IID(Ids::SPAWN_EGG, EntityLegacyIds::SQUID), "Squid Spawn Egg") extends SpawnEgg{
 			public function createEntity(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
 				return new Squid(Location::fromObject($pos, $world, $yaw, $pitch));
@@ -603,7 +609,7 @@ class ItemFactory{
 		});
 			    $this->register(new class(new IID(Ids::SPAWN_EGG, EntityLegacyIds::CAVE_SPIDER), "CaveSpider Spawn Egg") extends SpawnEgg{
 			public function createEntity(World $world, Vector3 $pos, float $yaw, float $pitch) : Entity{
-				return new CaveSpider(Location::fromObject($pos, $world, $yaw, $pitch));
+				return new Warden(Location::fromObject($pos, $world, $yaw, $pitch));
 			}
 		});
 			    $this->register(new class(new IID(Ids::SPAWN_EGG, EntityLegacyIds::CAT), "Cat Spawn Egg") extends SpawnEgg{

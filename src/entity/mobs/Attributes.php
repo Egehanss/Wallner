@@ -33,6 +33,9 @@ class Attributes {
 	public function isSkeleton(string $name) : bool {
 		return in_array($name, ["Skeleton"]);
 	}
+	public function isWarden(string $name) : bool {
+		return in_array($name, ["Warden"]);
+	}
 	public function getEnemyAttack(string $name) : string {
 		$dusmanlar = array("Zombie" => "Villager", "Wolf" => "Sheep", "Fox" => "Rabbit", "Fox" => "Chicken");
 		foreach ($dusmanlar as $kaynak => $hedef) {

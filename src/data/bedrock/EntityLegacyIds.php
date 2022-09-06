@@ -127,6 +127,8 @@ final class EntityLegacyIds{
 	public const TROPICALFISH = 111, TROPICAL_FISH = 111;
 	public const COD = 112, FISH = 112;
 	public const PANDA = 113;
+	public const AXOLOTL = 130;
+	public const WARDEN = 131;
 
 	private function __construct(){
 		//NOOP

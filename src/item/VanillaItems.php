@@ -707,6 +707,7 @@ final class VanillaItems{
 		self::register("turtle_master_potion", $factory->get(Ids::POTION, 37));
 		self::register("turtle_master_splash_potion", $factory->get(Ids::SPLASH_POTION, 37));
 		self::register("villager_spawn_egg", $factory->get(Ids::SPAWN_EGG, 15));
+        self::register("warden_spawn_egg", $factory->get(Ids::SPAWN_EGG, 131));
 		self::register("water_breathing_potion", $factory->get(Ids::POTION, 19));
 		self::register("water_breathing_splash_potion", $factory->get(Ids::SPLASH_POTION, 19));
 		self::register("water_bucket", $factory->get(Ids::BUCKET, 8));
@@ -732,5 +733,6 @@ final class VanillaItems{
 		self::register("yellow_dye", $factory->get(Ids::DYE, 11));
 		self::register("zombie_head", $factory->get(Ids::MOB_HEAD, 2));
 		self::register("zombie_spawn_egg", $factory->get(Ids::SPAWN_EGG, 32));
+        
 	}
 }

@@ -94,8 +94,12 @@ class MobsEntity extends Living {
 			$this->timer = 20;
 			$this->setMovementSpeed(1.50);
 		} else {
+			if ($this->isWarden() == true) {
+			$this->timer = 0;
+			$this->setMovementSpeed(10);
+		}else{
 			$this->timer = 10;
-			$this->setMovementSpeed(2.20);
+		}
 		}
 
 		parent::knockBack($x, $z, $force);
@@ -128,6 +132,9 @@ class MobsEntity extends Living {
 	}
 	public function isSkeleton() : bool {
 		return (new Attributes)->isSkeleton($this->getName());
+	}
+	public function isWarden() : bool {
+		return (new Attributes)->isWarden($this->getName());
 	}
 	public function isSwimming() : bool {
 		$swim = (new Attributes)->isSwimming($this->getName());

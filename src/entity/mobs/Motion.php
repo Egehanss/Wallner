@@ -19,10 +19,15 @@ use pocketmine\entity\Location;
 use pocketmine\event\entity\ExplosionPrimeEvent;
 use pocketmine\entity\Explosive;
 use pocketmine\entity\Creeper;
+use pocketmine\entity\Warden;
 use pocketmine\world\sound\IgniteSound; 
 use pocketmine\world\sound\ExplodeSound;
 use pocketmine\entity\projectile\Arrow as ArrowEntity;
 use pocketmine\entity\projectile\Projectile;
+use pocketmine\world\sound\WardenNearbyClose;
+use pocketmine\world\sound\WardenNearbyCloser;
+use pocketmine\world\sound\WardenNearbyClosest;
+use pocketmine\world\sound\WardenSlightlyAngry;
 
 
 class Motion {
@@ -176,6 +181,15 @@ class Motion {
 	}
 }
 		}
+		if ($entity->isWarden() == true) {
+			foreach($entity->getPosition()->getWorld()->getServer()->getOnlinePlayers() as $player){
+		if ($player->getPosition()->distance($entity->getPosition()) < 11){
+			$konum = new Vector3($player->getPosition()->getFloorX(), $player->getPosition()->getFloorY() + 1, $player->getPosition()->getFloorZ());
+		$entity->lookAt($konum);
+		$entity->setTargetEntity($player);
+	}
+}
+		}
 
 		if (!$entity->onGround and $motion->y < 0 and $flying == false and $swimming == false) {
 			$motion->y *= 0.6;
@@ -222,6 +236,9 @@ class Motion {
 	if($entity->isSkeleton() == true) {
 		$this->attackSkeletonEntity($entity, 4);
 	}
+	if ($entity->isWarden() == true) {
+	$this->attackWardenEntity($entity, 20);
+	}
 	
 	}
 		public function isDayTime(World $world) : bool {
@@ -236,6 +253,7 @@ class Motion {
 		$entity->lookAt($konum);
 	}
 }
+
 
 		if ($entity->lastUpdate % 100 == 0) {
 			if ($entity->getHealth() < $entity->getMaxHealth()) {
@@ -321,6 +339,9 @@ class Motion {
 		if ($entity->isSkeleton() == true) {
 			return;
 		}
+		if ($entity->isWarden() == true) {
+			return;
+		}
 
 		$dist = $entity->getPosition()->distanceSquared($target->getPosition());
 
@@ -337,6 +358,39 @@ class Motion {
 			$target->attack($ev);
 		}
             }
+
+		$entity->setAttackDelay($entity->getAttackDelay() + 1);
+
+		$pos = $target->getPosition();
+		$entity->setDestination(new Vector3($pos->x, 0, $pos->z));
+                }
+public function attackWardenEntity(MobsEntity $entity, int $damage) {
+		$target = $entity->getTargetEntity();
+
+		if ($target === null) {
+			return;
+		}
+
+		$dist = $entity->getPosition()->distanceSquared($target->getPosition());
+
+		if (!$target->isAlive() or $dist >= 50 or ($target instanceof Player and $target->isCreative() == true)) {
+			$entity->setMovementSpeed(10.00);
+			$entity->setTargetEntity(null);
+			return;
+		}
+
+		if ($entity->getAttackDelay() > 40) {
+                     if ($entity->getPosition()->distance($target->getPosition()) <= 1.5) {
+                     	$entity->broadcastSound(new WardenNearbyClosest());
+                     	$entity->broadcastSound(new WardenNearbyCloser());
+                     	$entity->broadcastSound(new WardenNearbyClose());
+                     	$entity->broadcastSound(new WardenSlightlyAngry());
+			$entity->setAttackDelay(0);
+			$ev = new EntityDamageByEntityEvent($entity, $target, EntityDamageEvent::CAUSE_ENTITY_ATTACK, $damage);
+			$target->attack($ev);
+		}
+            }
+            
 
 		$entity->setAttackDelay($entity->getAttackDelay() + 1);
 
